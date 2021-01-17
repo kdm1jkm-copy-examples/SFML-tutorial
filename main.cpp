@@ -1,7 +1,23 @@
-#include <iostream>
+#include <SFML/Graphics.hpp>
+
+using namespace sf;
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    Window window(VideoMode(800, 600), "Tutorial");
 
-    return 0;
+    Event event; // NOLINT(cppcoreguidelines-pro-type-member-init)
+    while (window.isOpen()) {
+        while (window.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    return EXIT_SUCCESS;
 }
