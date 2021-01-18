@@ -1,2 +1,4 @@
-﻿# SFML-tutorial
-SFML 배우면서 적은 것들이 적혀있는 마지막 커밋
+﻿# Creating a City Building Game with SFML 
+
+## Part 1: State Manager
+https://www.binpress.com/creating-city-building-game-with-sfml-state-manager/
