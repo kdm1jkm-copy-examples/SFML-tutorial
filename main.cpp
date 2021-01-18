@@ -12,6 +12,7 @@ int main() {
     window.setFramerateLimit(120);
 
     Event event; // NOLINT(cppcoreguidelines-pro-type-member-init)
+    Clock clock;
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
             switch (event.type) {
@@ -23,6 +24,10 @@ int main() {
                     break;
             }
         }
+
+        Time elapsed = clock.restart();
+
+        std::cout << elapsed.asSeconds() << std::endl;
     }
 
     return EXIT_SUCCESS;
