@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <string>
+#include <vector>
+#include <iostream>
 
 
 int main() {
@@ -19,11 +20,21 @@ int main() {
 
     // Load texture
     sf::Texture ballTexture;
-    if (!(ballTexture.loadFromFile(BALL_TEXTURE_DIRECTORY, sf::Rect<int>(0, 0, 16, 8)))) {
+    if (!ballTexture.loadFromFile(BALL_TEXTURE_DIRECTORY, sf::Rect<int>(0, 0, 16, 8))) {
         return EXIT_FAILURE;
     }
     // Anti-aliasing
 //    ballTexture.setSmooth(true);
+
+    // Load font
+    sf::Font font;
+    if (!font.loadFromFile(FONT_DIRECTORY)) {
+        return EXIT_FAILURE;
+    }
+
+    sf::Text text(L"Hello, World!\n나눔고딕은 한글도 지원합니다.", font, 50);
+    text.setPosition(300, 300);
+    text.setFillColor(sf::Color::Black);
 
     // Make sprite
     sf::Sprite ballSprite(ballTexture, sf::IntRect(8, 0, 8, 8));
@@ -34,6 +45,10 @@ int main() {
     // run at the same frequency as the monitor's refresh rate.
 //    window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(120);
+
+    std::vector<sf::Drawable *> objects;
+    objects.push_back(&ballSprite);
+    objects.push_back(&text);
 
     // Main loop
     sf::Event event; // NOLINT(cppcoreguidelines-pro-type-member-init)
@@ -61,7 +76,9 @@ int main() {
         }
 
         // Draw things
-        window.draw(ballSprite);
+        for (auto &object : objects) {
+            window.draw(*object);
+        }
 
         sf::Time elapsed = clock.restart();
         time += elapsed;
