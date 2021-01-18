@@ -4,7 +4,7 @@
 using namespace sf;
 
 int main() {
-    Window window(VideoMode(800, 600), "Tutorial");
+    RenderWindow window(VideoMode(800, 600), "Tutorial");
 
     // NEVER USE BOTH.
     // run at the same frequency as the monitor's refresh rate.
@@ -24,10 +24,13 @@ int main() {
                     break;
             }
         }
+        window.clear(Color::Green);
 
+        // Handle event
         Time elapsed = clock.restart();
-
         std::cout << elapsed.asSeconds() << std::endl;
+
+        window.display();
     }
 
     return EXIT_SUCCESS;
